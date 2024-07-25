@@ -4,7 +4,7 @@
         static $db ;
         
         if($db === null){
-            $db = new PDO('mysql:host=localhost;dbname=civilprojectdb;', 'root', '', [
+            $db = new PDO('mysql:host=localhost;dbname=sneakers;', 'root', '', [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]);
             $db->exec('SET NAMES UTF8');

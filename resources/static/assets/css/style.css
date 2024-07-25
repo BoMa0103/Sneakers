@@ -290,20 +290,30 @@ img {
 	flex-wrap: wrap;
 }
 
-.filter-price {
+.filter-brand {
+	width: 100%;
 	flex: 1 0 100%;
-	text-align: right;
 	margin-bottom: 20px;
 }
 
-.filter-brand {
-	flex: 1 0 100%;
-	margin-bottom: 20px;
+.filter-container {
+	width: 100%;
+	text-align: right; /* Вирівнювання контейнера по правому краю */
+	white-space: nowrap; /* Запобігає переносу на новий рядок */
+}
+
+.filter-price {
+	display: inline-block; /* Відображає елементи в ряд */
+	margin-right: 10px; /* Відступ між елементами */
+}
+
+.filter-price:last-child {
+	margin-right: 0; /* Відсутність відступу у останнього елемента */
 }
 
 .brand-options {
-	display: flex;
 	flex-wrap: wrap;
+	text-align: right;
 }
 
 .brand-options label {
