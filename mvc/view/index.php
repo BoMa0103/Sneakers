@@ -34,18 +34,26 @@
 <body>
 
 <!-- header start -->
-<header id="sticky-header" class="site-header">
+<header class="site-header"">
     <div class="container custom-header">
         <div class="header-content">
             <div class="header-left">
-                <span class="header-title">SHEAKERS</span>
+                <span class="header-title">SNEAKERS_</span>
             </div>
-            <div class="site-logo">
-                <img src="/sneakers/resources/static/images/logo.png" alt="Picture" style="max-width: 120px;">
-            </div>
+<!--            <div class="site-logo">-->
+<!--                <img src="/sneakers/resources/static/images/logo.png" alt="Picture" style="max-width: 120px;">-->
+<!--            </div>-->
             <div class="header-right">
                 <span class="header-title">SHOP</span>
             </div>
+<!--            <div class="menu">-->
+<!--                <button class="menu-button">Меню</button>-->
+<!--                <div class="dropdown-content">-->
+<!--                    <a href="#search">Поиск</a>-->
+<!--                    <a href="#contacts">Контакты</a>-->
+<!--                    <a href="#about">Про нас</a>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </header>
@@ -54,8 +62,14 @@
 
 <!-- Hero area start -->
 <section class="hero-area bg_img" data-background="/sneakers/resources/static/images/background01.jpg">
-    <div class="container">
+    <div class="container" style="padding-top: 60%;">
         <div class="filter-container">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Я шукаю..." oninput="fetchSearchResults()">
+                <button id="search-button" onclick="updateSearchParameter()">Знайти</button>
+                <div id="search-results"></div>
+            </div>
+
             <div class="filter-price">
                 <select id="sort-filter" onchange="updateURLParameter('sort', this.value)">
                     <option value="actualize" <?= $sort == 'actualize' ? 'selected' : '' ?>>За актуальністю</option>
@@ -81,6 +95,15 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+
+            <div class="filter-price">
+                <select id="season-filter" onchange="updateURLParameter('selectedSex', this.value)">
+                    <option value="">Всі</option>
+                    <?php foreach($sexOptions as $sexKey => $sexName): ?>
+                        <option value="<?=$sexKey?>" <?= $selectedSex == $sexKey ? 'selected' : '' ?>><?=$sexName?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
 
         <div class="filter-brand">
@@ -101,23 +124,40 @@
         </div>
 
         <div class="sneakers-list">
-            <div style="display: flex;">
+            <div class="product-container">
                 <?php foreach($sneakers as $sneaker): ?>
-                    <div class="product-card">
-                        <a href="?c=details&id=<?= $sneaker['id'] ?>">
+                    <a href="?c=details&id=<?= $sneaker['id'] ?>">
+                        <div class="product-card">
                             <div class="product-image">
                                 <img src="/sneakers/resources/data/images/sneakers/<?= $sneaker['previewImage'] ?>.jpg"
                                      alt="<?= $sneaker['previewImage'] ?>">
                             </div>
                             <div class="product-details">
                                 <h2 class="product-name"><?= $sneaker['name'] ?></h2>
-                                <p class="product-size">Size: <?= $sneaker['size'] ?></p>
+                                <p class="product-size">Розмір: <?= $sneaker['size'] ?></p>
                                 <span class="price"><?= $sneaker['price'] ?>₴</span>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?= $page - 1 ?>">&laquo;</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php if($totalPages != 1): ?>
+                    <a href="?page=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?= $page + 1 ?>">&raquo;</a>
+            <?php endif; ?>
         </div>
     </div>
 </section>
@@ -163,6 +203,48 @@
         const url = new URL(window.location.href);
         url.searchParams.set(param, value);
         window.location.href = url.toString();
+    }
+
+    function updateSearchParameter() {
+        var searchInput = document.getElementById('search-input').value;
+        var currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('search', searchInput);
+        window.location.href = currentUrl.toString();
+    }
+
+    function fetchSearchResults() {
+        var searchInput = document.getElementById('search-input').value;
+
+        if (searchInput.length > 0) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/sneakers/?c=search&query=' + encodeURIComponent(searchInput), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var results = JSON.parse(xhr.responseText);
+                    displaySearchResults(results);
+                }
+            };
+            xhr.send();
+        } else {
+            document.getElementById('search-results').style.display = 'none';
+        }
+    }
+
+    function displaySearchResults(results) {
+        var resultsContainer = document.getElementById('search-results');
+        resultsContainer.innerHTML = '';
+
+        if (results.length > 0) {
+            results.forEach(function(result) {
+                var resultItem = document.createElement('a');
+                resultItem.href = '?c=details&id=' + result.id;
+                resultItem.innerHTML = '<div class="result-item">' + result.name + '</div>';
+                resultsContainer.appendChild(resultItem);
+            });
+            resultsContainer.style.display = 'block'; // Показываем результаты
+        } else {
+            resultsContainer.style.display = 'none'; // Скрываем результаты, если нет данных
+        }
     }
 </script>
 </body>

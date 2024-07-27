@@ -10,6 +10,8 @@
 
     $sneaker = getSneakerById($params);
     $sneakerImages = getSneakerImagesById($params);
+    $season = getSneakerSeason($params);
+    $brand = getBrand($params);
 
     require('mvc/view/details.php');
 

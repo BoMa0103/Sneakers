@@ -38,7 +38,7 @@
     <div class="container custom-header">
         <div class="header-content">
             <div class="header-left">
-                <span class="header-title">SHEAKERS</span>
+                <span class="header-title">SNEAKERS</span>
             </div>
             <div class="site-logo">
                 <img src="/sneakers/resources/static/images/logo.png" alt="Picture" style="max-width: 120px;">
@@ -53,56 +53,72 @@
 <!-- header end -->
 
 <!-- Hero area start -->
-<div class="product-card">
-    <?php foreach($sneakerImages as $sneakerImage): ?>
-        <img src="/sneakers/resources/data/images/sneakers/<?= $sneakerImage['name'] ?>.jpg"
-             alt="<?= $sneakerImage['name'] ?>">
-    <?php endforeach; ?>
-    <a href="?c=details&id=<?= $sneaker['id'] ?>">
-        <div class="product-image">
-            <img src="/sneakers/resources/data/images/sneakers/<?= $sneaker['previewImage'] ?>.jpg"
-                 alt="<?= $sneaker['previewImage'] ?>">
+<section class="hero-area bg_img" data-background="/sneakers/resources/static/images/background01.jpg">
+    <div style="max-width: 1200px; margin: auto;">
+        <button class="back-button" onclick="window.history.back()">&#10094;&#10094;&#10094;&#10094;</button>
+    </div>
+    <div class="product-container">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slides">
+                    <?php foreach ($sneakerImages as $sneakerImage): ?>
+                        <div class="slide">
+                            <img src="/sneakers/resources/data/images/sneakers/<?= $sneakerImage['name'] ?>.jpg"
+                                 alt="<?= $sneakerImage['name'] ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+
+            <div class="dot-container">
+                <?php for ($i = 0; $i < count($sneakerImages); $i++): ?>
+                    <span class="dot" onclick="currentSlide(<?= $i + 1 ?>)"></span>
+                <?php endfor; ?>
+            </div>
         </div>
-        <div class="product-details">
-            <h2 class="product-name"><?= $sneaker['name'] ?></h2>
-            <p class="product-size">Size: <?= $sneaker['size'] ?></p>
-            <span class="price"><?= $sneaker['price'] ?>₴</span>
+
+        <div class="details-container">
+            <div class="product-info-details">
+                <h2 class="product-name"><?= $sneaker['name'] ?></h2>
+                <p class="product-size">Розмір: <?= $sneaker['size'] ?></p>
+                <span class="price"><?= $sneaker['price'] ?>₴</span>
+            </div>
+            <div class="product-description">
+                <h2 class="product-name">Щоб замовити скористайся наступними каналами зв'язвку:</h2>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="product-description">
+                <p>Сезон - <?= $season['name'] ?></p>
+                <p>Бренд - <?= $brand['name'] ?></p>
+                <p><?= $sneaker['description'] ?></p>
+            </div>
         </div>
-        <div>
-            <p><?= $sneaker['description'] ?></p>
-        </div>
-    </a>
-</div>
+    </div>
+</section>
 <!-- Hero area end -->
 
 <!-- footer start -->
 <footer class="site-footer pt-100 pb-10">
     <div class="container">
-        <div class="row">
-            <div class="col-xl-18 col-lg-18">
-                <div class="row">
-                    <div class="col-6 align-items-center">
-                        <div class="footer-widget">
-                            <h4 class="widget-title">Контаки </h4>
-                            <div class="social-links">
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-telegram"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="copyright-text row">
-                            <p class="col-6">© 2024 Sneakers. All Rights Reserved</p>
-                            <p class="col-6">Created by backend developer: <span>Bohdan Mamontov</span></p>
-                        </div>
-                    </div>
+        <div class="col-12 align-items-center">
+            <div class="footer-widget col-12">
+                <h4 class="widget-title">Контакти </h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
+            <div class="copyright-text row">
+                <p class="col-12">© 2024 Sneakers. All Rights Reserved</p>
+            </div>
         </div>
-    </div>
 </footer>
 <!-- footer end -->
 
@@ -122,5 +138,33 @@
 <script src="/sneakers/resources/static/assets/js/wow.min.js"></script>
 <script src="/sneakers/resources/static/assets/js/waypoint.js"></script>
 <script src="/sneakers/resources/static/assets/js/main.js"></script>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
 </body>
 </html>
