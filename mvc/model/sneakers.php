@@ -13,7 +13,7 @@ function getSneakers(array $filters = []) : array {
         $sql .= " AND brand = " .$filters['brand'];
     }
     if ($filters['season']) {
-        $sql .=  " AND season = " .$filters['season'];
+        $sql .=  " AND season LIKE '" .$filters['season']."'";
     }
     if ($filters['size']) {
         $sql .=  " AND size = " .$filters['size'];
@@ -51,13 +51,6 @@ function getSneakerImagesById(array $params = []): array {
     $query = dbQuery($sql, $params);
     return $query->fetchAll();
 }
-
-function getSneakerSeason(array $params = []): array {
-    $sql = "SELECT seasons.* FROM seasons JOIN sneakers WHERE sneakers.season = seasons.id AND sneakers.id " . " = :id";
-    $query = dbQuery($sql, $params);
-    return $query->fetch();
-}
-
 function getBrand(array $params = []): array {
     $sql = "SELECT brands.* FROM brands JOIN sneakers WHERE sneakers.brand = brands.id AND sneakers.id " . " = :id";
     $query = dbQuery($sql, $params);
@@ -66,12 +59,6 @@ function getBrand(array $params = []): array {
 
 function getSizes(): array {
     $sql = "SELECT DISTINCT size FROM sneakers WHERE published = 1 ORDER BY size";
-    $query = dbQuery($sql);
-    return $query->fetchAll();
-}
-
-function getSeasons(): array {
-    $sql = "SELECT * FROM seasons";
     $query = dbQuery($sql);
     return $query->fetchAll();
 }

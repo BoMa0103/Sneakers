@@ -91,8 +91,8 @@
 		left: -20%;
 	}
 	.hero-area {
-		padding-bottom: 280px;
-		padding-top: 310px;
+		padding-bottom: 200px;
+		padding-top: 200px;
 	}
 
 	.custom-header-2 {
@@ -266,6 +266,13 @@
 }
 
 @media (max-width: 1300px) {
+	.product-container {
+		max-width: 1000px;
+	}
+	.back-button-div {
+		max-width: 1000px;
+		margin: auto;
+	}
 	.header-top-info .content a {
 		font-size: 15px;
 	}
@@ -364,8 +371,23 @@
 	}
 }
 
+@media (max-width: 1061px) {
+	.product-container {
+		display: block;
+	}
+}
+
 /* Normal desktop :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
+	.product-container {
+		display: block;
+	}
+	.sneakers-list .product-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+		gap: 10px;
+	}
+
 	.custom-header {
 		width: 100%;
 		max-width: 100%;
@@ -390,8 +412,8 @@
 	}
 
 	.hero-area {
-		padding-top: 280px;
-		padding-bottom: 160px;
+		padding-top: 200px;
+		padding-bottom: 200px;
 	}
 
 	.hero-ilustration-shape {
@@ -751,11 +773,14 @@
 
 /* Tablet desktop :768px. */
 @media (max-width: 991px) {
+	.sneakers-list .product-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+		gap: 10px;
+	}
+
 	.feature-carousel .owl-nav {
 		display: none;
-	}
-	.site-header {
-		padding-top: 25px;
 	}
 .site-header.sticky-on {
 	padding-bottom: 2px;
@@ -879,7 +904,7 @@
 
 	.hero-area {
 		padding-top: 200px;
-		padding-bottom: 220px;
+		padding-bottom: 200px;
 	}
 
 	.hero-content .title {
@@ -1340,6 +1365,32 @@
 
 /* small mobile :320px. */
 @media (max-width: 767px) {
+	.sneakers-list {
+		width: 510px;
+	}
+	.product-container a {
+		width: 510px;
+	}
+	.product-card {
+		width: 510px;
+		height: 450px;
+	}
+	.header-left {
+		display: none;
+	}
+	.header-right {
+		display: none;
+	}
+	.site-logo {
+		margin: auto;
+	}
+	.sneakers-list .product-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+		gap: 10px;
+	}
+
+
 	.about-list .single-item {
 		-ms-flex-preferred-size: 100%;
 		flex-basis: 100%;
@@ -1564,6 +1615,21 @@
 
 /* Device 575 */
 @media (max-width: 575px) {
+	.sneakers-list {
+		width: 460px;
+	}
+	.product-container a {
+		width: 100%;
+	}
+	.product-card {
+		width: 100%;
+		height: 400px;
+	}
+	.sneakers-list .product-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+		gap: 10px;
+	}
 	.single-department {
 		padding: 0 40px;
 	}
@@ -1816,6 +1882,21 @@
 	}
 }
 @media (max-width: 500px) {
+	.sneakers-list {
+		width: 250px;
+	}
+	.product-container a {
+		width: 100%;
+	}
+	.product-card {
+		width: 100%;
+	}
+	.sneakers-list .product-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 10px;
+	}
+
 	.section-heading .section-title {
 		font-size: 36px;
 	}
