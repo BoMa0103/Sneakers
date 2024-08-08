@@ -5467,6 +5467,100 @@ img {
 
 
 
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 1em 0;
+	text-align: center;
+}
+
+header h1 {
+	margin: 0;
+}
+
+nav ul {
+	list-style: none;
+	padding: 0;
+}
+
+nav ul li {
+	display: inline;
+	margin: 0 10px;
+}
+
+nav ul li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+main {
+	padding: 20px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+section {
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+section h2 {
+	margin-top: 0;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+form label {
+	margin-top: 10px;
+}
+
+form input, form textarea, form select, form button {
+	padding: 10px;
+	margin-top: 5px;
+}
+
+form button {
+	background-color: #333;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+form button:hover {
+	background-color: #555;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	height: 20px;
+}
+
+/*footer {*/
+/*	text-align: center;*/
+/*	padding: 20px 0;*/
+/*	background-color: #333;*/
+/*	color: #fff;*/
+/*	position: fixed;*/
+/*	width: 100%;*/
+/*	bottom: 0;*/
+/*}*/
+
+
+
 .counter-area::after {
 	right: 0;
 	width: 600px;

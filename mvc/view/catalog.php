@@ -127,7 +127,7 @@
                     <a href="?c=details&id=<?= $sneaker['id'] ?>">
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="/sneakers/resources/data/images/sneakers/<?= $sneaker['previewImage'] ?>.jpg"
+                                <img src="/sneakers/resources/data/images/sneakers/<?= $sneaker['previewImage'] ?>"
                                      alt="<?= $sneaker['previewImage'] ?>">
                             </div>
                             <div class="product-details">

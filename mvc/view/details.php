@@ -71,7 +71,7 @@
                 <div class="slides">
                     <?php foreach ($sneakerImages as $sneakerImage): ?>
                         <div class="slide">
-                            <img src="/sneakers/resources/data/images/sneakers/<?= $sneakerImage['name'] ?>.jpg"
+                            <img src="/sneakers/resources/data/images/sneakers/<?= $sneakerImage['name'] ?>"
                                  alt="<?= $sneakerImage['name'] ?>">
                         </div>
                     <?php endforeach; ?>
