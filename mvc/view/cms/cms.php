@@ -28,10 +28,22 @@
     <link rel="stylesheet" href="/sneakers/resources/static/assets/css/style.css">
     <link rel="stylesheet" href="/sneakers/resources/static/assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        .center-message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Висота, щоб блок був центруваний по вертикалі */
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 <header>
-    <h1 style="color: #fff;">Адмінка</h1>
+    <h1 style="color: #fff; padding-bottom: 10px;">Адмінка</h1>
     <nav>
         <ul>
             <li><a href="?c=cms/sneakers/add-sneaker">Додати кросівки</a></li>
@@ -43,5 +55,10 @@
 </header>
 
 <main>
+    <div class="center-message">
+        Ви зайшли в Адмін панель. Оберіть розділ для подальшої роботи.
+    </div>
+</main>
+
 </body>
 </html>

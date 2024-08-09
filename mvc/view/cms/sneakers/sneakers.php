@@ -62,12 +62,12 @@
 </head>
 <body>
 <header>
-    <h1 style="color: #fff;">Адмінка</h1>
+    <h1 style="color: #fff; padding-bottom: 10px;">Адмінка</h1>
     <nav>
         <ul>
             <li><a href="?c=cms/sneakers/add-sneaker">Додати кросівки</a></li>
             <li><a href="?c=cms/brands/add-brand">Додати бренд</a></li>
-            <li><a href="?c=cms/sneakers/sneakers">Кросівки</a></li>
+            <li><a href="?c=cms/sneakers/sneakers" style="color: #4EB5E6;">Кросівки</a></li>
             <li><a href="?c=cms/brands/brands">Бренди</a></li>
         </ul>
     </nav>

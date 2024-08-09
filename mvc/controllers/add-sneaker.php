@@ -16,6 +16,9 @@
     $price = $_POST['price'];
     $published = $_POST['published'] ?? 0;
     $previewImage = $_FILES['previewImage'];
+    $images = $_FILES['images'];
+
+    $sneakers_id = null;
 
     if (isset($_FILES['previewImage']) && $_FILES['previewImage']['error'] == 0) {
         $image_name = uniqid($_FILES['previewImage']['name']) . $_FILES['previewImage']['name'];
@@ -23,7 +26,7 @@
         $target_file = $target_dir . $image_name;
 
         if (move_uploaded_file($_FILES['previewImage']['tmp_name'], $target_file)) {
-            addSneaker([
+            $sneakers_id = addSneaker([
                 'name' => $name,
                 'description' => $description,
                 'size' => $size,
@@ -42,6 +45,29 @@
         echo "Помилка завантаження зображення або зображення не було завантажене.";
     }
 
-    header('Location: /sneakers/?c=cms/sneakers/add-sneaker');
+    if (!$sneakers_id) {
+        header('Location: /sneakers/?c=cms/sneakers/edit-sneaker&id=' . $sneakers_id);
+        exit;
+    }
+
+    if (!empty($_FILES['images']['name'][0])) {
+        foreach ($_FILES['images']['name'] as $key => $image) {
+            $image_name = uniqid($_FILES['images']['name'][$key]) . $_FILES['images']['name'][$key];
+            $target_dir = "resources/data/images/sneakers/";
+            $target_file = $target_dir . $image_name;
+
+            if (move_uploaded_file($_FILES['images']['tmp_name'][$key], $target_file)) {
+                addSneakerImage([
+                    'sneakers_id' => $sneakers_id,
+                    'name' => $image_name,
+                    'priority' => 1000 - $key,
+                ]);
+            } else {
+                echo "Помилка при завантаженні зображень.";
+            }
+        }
+    }
+
+    header('Location: /sneakers/?c=cms/sneakers/edit-sneaker&id=' . $sneakers_id);
     exit;
 ?>

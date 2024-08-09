@@ -31,7 +31,7 @@
 </head>
 <body>
 <header>
-    <h1 style="color: #fff;">Адмінка</h1>
+    <h1 style="color: #fff; padding-bottom: 10px;">Адмінка</h1>
     <nav>
         <ul>
             <li><a href="?c=cms/sneakers/add-sneaker">Додати кросівки</a></li>
@@ -92,7 +92,7 @@
             <input type="checkbox" id="sneaker-published" <?= $sneaker['published'] == 1 ? 'checked' : '' ?> name="published">
 
             <label for="sneaker-previewImage">Базове зображення:</label>
-            <input type="file" id="sneaker-previewImage" name="previewImage" value="<?=$sneaker['previewImage']?>" accept="image/*" required>
+            <input type="file" id="sneaker-previewImage" name="previewImage" accept="image/*">
 
             <div class="image-preview" id="image-preview">
                 <?php if (!empty($sneaker['previewImage'])): ?>
@@ -101,11 +101,16 @@
             </div>
 
             <label for="sneaker-images">Зображення:</label>
-            <input type="file" id="sneaker-images" name="images" accept="image/*" multiple required>
+            <input type="file" id="sneaker-images" name="images[]" accept="image/*" multiple>
 
-            <div class="slider">
-                <div class="slides" id="image-slider"></div>
+            <div class="images" id="images">
+                <?php foreach($sneakerImages as $sneakerImage): ?>
+                    <img src="/sneakers/resources/data/images/sneakers/<?= htmlspecialchars($sneakerImage['name']) ?>" alt="<?=$sneakerImage['name']?>">
+                <?php endforeach; ?>
             </div>
+
+            <input type="hidden" id="imagesCleared" name="imagesCleared" value="0">
+            <button type="button" id="clear-images">Очистити зображення</button>
 
             <button type="submit">Оновити кросівки</button>
         </form>
@@ -117,6 +122,29 @@
 </footer>
 
 <script>
+    const imageInput = document.getElementById('sneaker-images');
+    const previewContainer = document.getElementById('images');
+    const clearButton = document.getElementById('clear-images');
+
+    imageInput.addEventListener('change', function(event) {
+        const files = event.target.files;
+
+        for (const file of files) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previewContainer.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    clearButton.addEventListener('click', function() {
+        previewContainer.innerHTML = '';
+        imageInput.value = '';
+    });
+
     document.getElementById('sneaker-previewImage').addEventListener('change', function(event) {
         const previewContainer = document.getElementById('image-preview');
         previewContainer.innerHTML = '';
@@ -131,6 +159,10 @@
             }
             reader.readAsDataURL(file);
         }
+    });
+
+    document.getElementById('clear-images').addEventListener('click', function() {
+        document.getElementById('imagesCleared').value = "1";
     });
 </script>
 </body>

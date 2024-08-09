@@ -31,7 +31,7 @@
 </head>
 <body>
 <header>
-    <h1 style="color: #fff;">Адмінка</h1>
+    <h1 style="color: #fff; padding-bottom: 10px;">Адмінка</h1>
     <nav>
         <ul>
             <li><a href="?c=cms/sneakers/add-sneaker">Додати кросівки</a></li>

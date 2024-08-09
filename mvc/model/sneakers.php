@@ -2,16 +2,25 @@
 
     require_once('mvc/core/db.php');
 
-    function addSneaker(array $data) {
+    function addSneaker(array $data): int {
         $sql = "INSERT INTO sneakers (name, description, size, brand, season, sex, basePrice, price, published, previewImage)" .
            "VALUES (:name, :description, :size, :brand, :season, :sex, :basePrice, :price, :published, :previewImage)";
 
         dbQuery($sql, $data);
+
+        $lastIdQuery = "SELECT LAST_INSERT_ID() AS last_id";
+        $result = dbQuery($lastIdQuery);
+        return $result->fetch()['last_id'];
     }
 
     function updateSneaker(array $data) {
-        $sql = "UPDATE sneakers SET name = :name, description = :description, size = :size, brand = :brand, season = :season, sex = :sex," .
-        " basePrice = :basePrice, price = :price, published = :published, previewImage = :previewImage WHERE id = :id";
+        $sql = "UPDATE sneakers SET name = :name, description = :description, size = :size, brand = :brand, season = :season, sex = :sex, basePrice = :basePrice, price = :price, published = :published";
+
+        if (!empty($data['previewImage'])) {
+            $sql .= ", previewImage = :previewImage";
+        }
+
+        $sql .= " WHERE id = :id";
 
         dbQuery($sql, $data);
     }
@@ -82,6 +91,19 @@
         $query = dbQuery($sql, $params);
         return $query->fetchAll();
     }
+
+    function addSneakerImage(array $data) {
+        $sql = "INSERT INTO images (sneakers_id, name, priority)" .
+           "VALUES (:sneakers_id, :name, :priority)";
+
+        dbQuery($sql, $data);
+    }
+
+    function deleteSneakerImages(array $data) {
+        $sql = "DELETE FROM images WHERE sneakers_id = :sneakers_id";
+        dbQuery($sql, $data);
+    }
+
     function getBrand(array $params = []): array {
         $sql = "SELECT brands.* FROM brands JOIN sneakers WHERE sneakers.brand = brands.id AND sneakers.id " . " = :id";
         $query = dbQuery($sql, $params);
