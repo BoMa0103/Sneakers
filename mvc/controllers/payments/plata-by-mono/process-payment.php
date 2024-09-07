@@ -1,18 +1,14 @@
 <?php
-    // Параметри для Monopay
-    $token = 'uM68R2IhFy9lkq9WwBk2VFSsvrNR1IWwaJVwnyJEZXf8'; // API-токен Monobank
-    $order_id = uniqid(); // Унікальний ідентифікатор замовлення
+    $token = 'uM68R2IhFy9lkq9WwBk2VFSsvrNR1IWwaJVwnyJEZXf8';
+    $ccyUAH = 980;
 
-    // Дані з форми
-    $amount = $_POST['amount'] ?? 0; // Сума замовлення
+    $amount = $_POST['amount'] ?? 0;
 
-    // Перевірка коректності суми
     if ($amount <= 0) {
         echo 'Некоректна сума оплати';
         exit();
     }
 
-    // Підключення до Monobank API для створення платіжного інвойсу
     $ch = curl_init('https://api.monobank.ua/api/merchant/invoice/create');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -22,8 +18,9 @@
 
     // Дані для створення інвойсу
     $invoice_data = json_encode([
-        'amount'       => $amount * 100, // Сума у копійках (для 100 грн = 10000)
-        'redirect_url' => 'http://localhost/sneakers/', // Куди перенаправити після оплати
+        'amount' => $amount * 100,
+        'ccy' => $ccyUAH,
+        'redirectUrl' => 'http://localhost/sneakers/',
     ]);
 
     curl_setopt($ch, CURLOPT_POSTFIELDS, $invoice_data);
@@ -31,12 +28,9 @@
     curl_close($ch);
 
     $response_data = json_decode($response, true);
-    var_dump($response_data);
 
-    // Перевіряємо, чи вдалося створити інвойс
-    if (isset($response_data['page_url'])) {
-        // Перенаправляємо користувача на сторінку оплати
-        header('Location: ' . $response_data['page_url']);
+    if (isset($response_data['pageUrl'])) {
+        header('Location: ' . $response_data['pageUrl']);
         exit();
     } else {
         echo 'Помилка при створенні платіжного інвойсу. Спробуйте пізніше.';
