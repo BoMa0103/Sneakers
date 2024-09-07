@@ -19,7 +19,18 @@
         'U' => 'Унісекс',
     ];
 
-    $sneakers = getAllSneakers();
+    $page = $_GET['page'] ?? 1;
+
+    $perPage = 30;
+    $offset = ($page - 1) * $perPage;
+
+    $sneakers = getAllSneakers([
+        'limit' => $perPage,
+        'offset' => $offset,
+    ]);
+
+    $totalPages = ceil(getSneakersCount() / $perPage);
+
 
     require('mvc/view/cms/sneakers/sneakers.php');
 

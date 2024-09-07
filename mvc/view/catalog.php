@@ -144,17 +144,17 @@
         <!-- Pagination -->
         <div class="pagination">
             <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>">&laquo;</a>
+                <a onclick="updateURLParameter('page', <?= $page - 1 ?>)">&laquo;</a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <?php if($totalPages != 1): ?>
-                    <a href="?page=<?= $i ?>" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
+                    <a onclick="updateURLParameter('page', <?=$i?>)" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
                 <?php endif; ?>
             <?php endfor; ?>
 
             <?php if ($page < $totalPages): ?>
-                <a href="?page=<?= $page + 1 ?>">&raquo;</a>
+                <a onclick="updateURLParameter('page', <?= $page + 1 ?>)">&raquo;</a>
             <?php endif; ?>
         </div>
     </div>

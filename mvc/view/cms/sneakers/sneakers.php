@@ -103,6 +103,30 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a onclick="updateURLParameter('page', <?= $page - 1 ?>)">&laquo;</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if($totalPages != 1): ?>
+                <a onclick="updateURLParameter('page', <?=$i?>)" class="<?= $i == $page ? 'active' : '' ?>"><?= $i ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($page < $totalPages): ?>
+            <a onclick="updateURLParameter('page', <?= $page + 1 ?>)">&raquo;</a>
+        <?php endif; ?>
+    </div>
 </main>
+<script>
+    function updateURLParameter(param, value) {
+        const url = new URL(window.location.href);
+        url.searchParams.set(param, value);
+        window.location.href = url.toString();
+    }
+</script>
 </body>
 </html>
