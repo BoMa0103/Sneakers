@@ -101,6 +101,14 @@
                     <a href="#"><i class="fab fa-telegram"></i></a>
                 </div>
             </div>
+            <div class="payment-section">
+                <form action="?c=payments/plata-by-mono/process-payment" method="POST">
+                    <input type="hidden" name="amount" value=<?= $sneaker['price'] ?>>
+                    <button type="submit" class="btn btn-primary">
+                        Оплатити онлайн
+                    </button>
+                </form>
+            </div>
             <div class="product-description">
                 <p>Сезон - <?= $seasons[$sneaker['season']] ?></p>
                 <p>Бренд - <?= $brand['name'] ?></p>
