@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="uk">
 <head>
 
     <!--========= Required meta tags =========-->
@@ -30,29 +29,36 @@
     <link rel="stylesheet" href="/sneakers/resources/static/assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
+    <style>
+        .center-message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh; /* Висота, щоб блок був центруваний по вертикалі */
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-
-<header id="sticky-header" class="site-header">
-    <div class="container custom-header">
-        <div class="menu">
-            <button class="menu-button">Меню</button>
-            <div class="dropdown-content">
-                <a href="?c=catalog">Каталог</a>
-                <a href="?c=about">Про нас</a>
-            </div>
-        </div>
-    </div>
+<header>
+    <h1 style="color: #fff; padding-bottom: 10px;">Адмінка</h1>
+    <nav>
+        <ul>
+            <li><a href="?c=cms/sneakers/add-sneaker">Додати кросівки</a></li>
+            <li><a href="?c=cms/brands/add-brand">Додати бренд</a></li>
+            <li><a href="?c=cms/sneakers/sneakers">Кросівки</a></li>
+            <li><a href="?c=cms/brands/brands">Бренди</a></li>
+        </ul>
+    </nav>
 </header>
 
-<div class="main-page">
-    <div class="site-logo" style="padding-top: 40vh;">
-        <img src="/sneakers/resources/static/images/logo.png" alt="Picture" style="max-width: 120px;">
+<main>
+    <div class="center-message">
+        Ви зайшли в Адмін панель. Оберіть розділ для подальшої роботи.
     </div>
-    <span class="header-title" style="margin-top: 20px">SNEAKERS</span>
-    <span class="header-title" style="margin-top: 20px">SHOP</span>
-</div>
+</main>
 
-<!-- header end -->
 </body>
 </html>

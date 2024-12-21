@@ -60,64 +60,9 @@
 
 <!-- header end -->
 
-<!-- Hero area start -->
-<section class="hero-area bg_img" style="background-color: rgba(100, 128, 128, 0.3);">
-    <div class="back-button-div">
-        <button class="back-button" onclick="window.history.back()">&#10094;&#10094;&#10094;&#10094;</button>
-    </div>
-    <div class="product-container">
-        <div class="slider-container">
-            <div class="slider">
-                <div class="slides">
-                    <?php foreach ($sneakerImages as $sneakerImage): ?>
-                        <div class="slide">
-                            <img src="/sneakers/resources/data/images/sneakers/<?= $sneakerImage['name'] ?>"
-                                 alt="<?= $sneakerImage['name'] ?>">
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+<div>
 
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-
-            <div class="dot-container">
-                <?php for ($i = 0; $i < count($sneakerImages); $i++): ?>
-                    <span class="dot" onclick="currentSlide(<?= $i + 1 ?>)"></span>
-                <?php endfor; ?>
-            </div>
-        </div>
-
-        <div class="details-container">
-            <div class="product-info-details">
-                <h2 class="product-name"><?= $sneaker['name'] ?></h2>
-                <p class="product-size">Розмір: <?= $sneaker['size'] ?></p>
-                <span class="price"><?= $sneaker['price'] ?>₴</span>
-            </div>
-            <div class="product-description">
-                <h2 class="product-name">Щоб замовити скористайся наступними каналами зв'язвку:</h2>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                </div>
-            </div>
-            <div class="payment-section">
-                <form action="?c=payments/plata-by-mono/process-payment" method="POST">
-                    <input type="hidden" name="amount" value=<?= $sneaker['price'] ?>>
-                    <button type="submit" class="btn btn-primary">
-                        Оплатити онлайн
-                    </button>
-                </form>
-            </div>
-            <div class="product-description">
-                <p>Сезон - <?= $seasons[$sneaker['season']] ?></p>
-                <p>Бренд - <?= $brand['name'] ?></p>
-                <p><?= $sneaker['description'] ?></p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Hero area end -->
+</div>
 
 <!-- footer start -->
 <footer class="site-footer pt-100 pb-10">
@@ -154,33 +99,5 @@
 <script src="/sneakers/resources/static/assets/js/wow.min.js"></script>
 <script src="/sneakers/resources/static/assets/js/waypoint.js"></script>
 <script src="/sneakers/resources/static/assets/js/main.js"></script>
-<script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("slide");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "grid";
-        dots[slideIndex - 1].className += " active";
-    }
-</script>
 </body>
 </html>

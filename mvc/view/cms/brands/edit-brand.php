@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="uk">
 <head>
 
     <!--========= Required meta tags =========-->
@@ -29,30 +28,38 @@
     <link rel="stylesheet" href="/sneakers/resources/static/assets/css/style.css">
     <link rel="stylesheet" href="/sneakers/resources/static/assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-
-<header id="sticky-header" class="site-header">
-    <div class="container custom-header">
-        <div class="menu">
-            <button class="menu-button">Меню</button>
-            <div class="dropdown-content">
-                <a href="?c=catalog">Каталог</a>
-                <a href="?c=about">Про нас</a>
-            </div>
-        </div>
-    </div>
+<header>
+    <h1 style="color: #fff; padding-bottom: 10px;">Адмінка</h1>
+    <nav>
+        <ul>
+            <li><a href="?c=cms/sneakers/add-sneaker">Додати кросівки</a></li>
+            <li><a href="?c=cms/brands/add-brand">Додати бренд</a></li>
+            <li><a href="?c=cms/sneakers/sneakers">Кросівки</a></li>
+            <li><a href="?c=cms/brands/brands">Бренди</a></li>
+        </ul>
+    </nav>
 </header>
 
-<div class="main-page">
-    <div class="site-logo" style="padding-top: 40vh;">
-        <img src="/sneakers/resources/static/images/logo.png" alt="Picture" style="max-width: 120px;">
-    </div>
-    <span class="header-title" style="margin-top: 20px">SNEAKERS</span>
-    <span class="header-title" style="margin-top: 20px">SHOP</span>
-</div>
+<main>
+    <section id="add-brand">
+        <h2>Оновити бренд</h2>
+        <form action="?c=edit-brand&id=<?=$brand['id']?>" method="POST" enctype="multipart/form-data">
+            <label for="brand-name">Назва бренду:</label>
+            <input type="text" id="brand-name" name="name" value="<?=$brand['name']?>" required>
 
-<!-- header end -->
+            <label for="sneaker-priority">Пріоритет:</label>
+            <input type="number" id="sneaker-priority" name="priority" value="<?=$brand['priority']?>" required>
+
+            <button type="submit">Оновити бренд</button>
+
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>Адмінка &copy; 2024 Sneakers</p>
+</footer>
 </body>
 </html>
